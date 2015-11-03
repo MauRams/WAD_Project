@@ -1,0 +1,123 @@
+body{
+	background-color:#FAFAFA;
+	font-family: "Metrophobic";
+}
+.ico{
+	width:100px;
+	height:100px;
+	margin-top:-41px;
+	float:left;
+}
+.text_decor_brand{
+	font-size:30px;
+	color:#FAFAFA;
+}
+.head{
+	width:220px;
+	height:70px;
+	border:1px solid black;
+	margin-top:10px;
+}
+.custom_block{
+	width:88%;
+	border:1px solid black;
+	margin-top:15px;
+}
+.custom_list{
+	margin-left:0px;
+	padding-left:0px;
+	margin-right:0px;
+}
+.centerp{
+	width:95%;
+	padding:8px;
+	border:1px solid black;
+	margin-bottom:20px;
+	background-color:#FAFAFA;
+		background-image: url("img/back1.png");
+		border-radius:15px;
+}
+
+.color_background{
+background-image: url("img/back3.jpg");
+	-webkit-box-shadow: 1px 1px 30px 0px rgba(0, 24, 70, 1);
+-moz-box-shadow:    1px 1px 30px 0px rgba(0, 24, 70, 1);
+box-shadow:         1px 1px 30px 0px rgba(0, 24, 70, 1);
+}
+.color_box{
+	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	background-color:#333;
+	background-image: url("img/box_2.png");
+}
+.nopad{
+	padding-left:0px;
+	padding-right:0px;
+}
+.default_nav{
+	border-radius:0px;
+}
+footer{
+	margin-top:30px;
+	background-color:#101010;
+	color:#FAFAFA;
+}
+h1{
+color:#337AB7;
+	margin-top:15px;
+	font-family: 'Fjalla One', sans-serif;
+
+}
+h4, h5{
+		color:rgb(252, 86, 5);
+	margin-top:10px;
+}
+h3{
+	color:rgb(252, 86, 5);
+	margin-top:10px;
+		font-size: 30px;
+}
+ul{
+	margin-top:5px;
+}
+
+.clear{
+	clear:right;
+}
+
+/*Colours for side navbar menu */
+.color1{
+	background-color:#cc8400;
+	
+}
+.color2{
+	background-color:#990000;
+}
+.color3{
+	background-color:#336699;
+}
+.color4{
+	background-color:#006600;
+}
+.color5{
+	background-color:#cccc00;
+}
+.color6{
+	background-color:black;
+	
+}
+/*Vertical choice menu */
+.list-group{
+	font-family: 'Fjalla One', sans-serif;
+}
+.list-group-item{
+	border:1px solid black;
+}
+#toggleh, #togglecss, #togglejs{
+	display:none;
+}
+.sub_item{
+	margin-left:5px;
+	height:40px;
+}

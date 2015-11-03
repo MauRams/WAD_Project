@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+	<title>Page Here</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+	 <script src="jquery-1.11.3.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.ajax({url: "/testData", success: function(result){
+            $("#div1").html(result);
+            console.log(resulet);
+        }});
+    });
+});
+
+</script>
+</head>
+<body>
+<div id='div1'></div>
+<button>Get External Content</button>
+</body>
+</html>
