@@ -39,8 +39,8 @@
  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <ul class="nav nav-pills navbar-right">
 	<li id="home"role="presentation"><a href="javascript:slideStatusBar()"><span id="menu_status_bar">Show Status Bar</span></a></li>
-  <li id="home"role="presentation" ><a href="#">Messages</a></li>
-  <li id="guide"role="presentation"><a href="#">Progile</a></li>
+  <li id="home"role="presentation" ><a href="javascript:layerChange('/messages')">Messages</a></li>
+  <li id="guide"role="presentation"><a href="javascript:layerChange('/profile')">Profile</a></li>
   <li id="guide"role="presentation"><a href="/logout">LogOut</a></li>
 </ul>
     </div><!-- /.navbar-collapse -->
@@ -98,9 +98,35 @@
 					<!-- Side NavBar Finishing -->
 
 
-	<div class="col-md-8">
+
+
+					<!-- main info -->
+
+
+	<div id='mainGame'class="col-md-8">
 		<div class="custom_block center-block color_box"><h3 class="text-center">MainGameWindow</h3>
-			<div class="centerp center-block">
+			<div id='gameWindow' class="centerp center-block">
+			<p>There is plenty of tutorial pages around there in the web. This page is more about
+				programming language {guide}, some code snippets and few templates
+				for myself and whoever needs them, Enjoy! 
+				programming language {guide}, some code snippets and few templates
+				for myself and whoever needs them, Enjoy! 
+				programming language {guide}, some code snippets and few templates
+				for myself and whoever needs them, Enjoy! 
+				programming language {guide}, some code snippets and few templates
+				for myself and whoever needs them, Enjoy! 
+				programming language {guide}, some code snippets and few templates
+				for myself and whoever needs them, Enjoy!
+</p>
+</div></div>
+	</div>
+
+				<!-- otherWindow -->
+
+
+		<div id='mainProfile' class="col-md-8">
+		<div class="custom_block center-block color_box"><h3 class="text-center">MainGameWindow</h3>
+			<div id='gameWindow' class="centerp center-block">
 			<p>There is plenty of tutorial pages around there in the web. This page is more about
 				programming language {guide}, some code snippets and few templates
 				for myself and whoever needs them, Enjoy! 
@@ -118,7 +144,7 @@
 
 
 
-				<div class="col-md-2">
+				<div class="col-md-2 clear right">
 		<div class="custom_block center-block color_box"><h4 class="text-center">UserList</h4>
 			<div class="centerp center-block">
 		<div id="user_list_small" style="height: 120px; overflow-y: scroll;">
@@ -134,7 +160,7 @@
 
 
 
-	<div class="col-md-2 clear">
+	<div class="col-md-2 clear right">
 		<div class="custom_block center-block color_box"><h4 class="text-center">Chat</h4>
 			<div class="centerp center-block">
 				<div id="chat_small color" style="height: 120px; overflow-y: scroll;">

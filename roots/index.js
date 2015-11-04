@@ -8,6 +8,21 @@ module.exports = function(app, passport) {
 		});
 	});
 
+
+			//returns on profile page
+		app.get('/profile', isLoggedIn, function(req, res) {
+		res.render('prof.ejs');
+	});
+		app.get('/maingame', isLoggedIn, function(req, res) {
+		res.render('game.ejs');
+	});
+
+		app.get('/messages', isLoggedIn, function(req, res) {
+		res.render('messages.ejs');
+	});
+
+
+
 	app.get('/main', isLoggedIn, function(req, res) {
 		console.log(req.user);
 		res.render('main.ejs', {

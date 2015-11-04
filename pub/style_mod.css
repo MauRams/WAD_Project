@@ -13,3 +13,9 @@ nav{
 #singup_form{
 	display:none;
 }
+#mainGame{
+	display:none;
+}
+.right{
+	float:right;
+}

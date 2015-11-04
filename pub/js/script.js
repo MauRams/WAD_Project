@@ -18,6 +18,48 @@ var slideStatusBar = function(){
 	$('#status_bar').toggle("slide");
 };
 
+//changeLayers
+var helper = 'second';
+var layerChange =function(url){
+
+    //login_form, singup_form
+    if(helper == 'second'){
+
+    	    $.ajax({url: url, success: function(result){
+        $("#mainGame").html(result);
+   		 }});
+
+
+      $("#mainProfile").slideToggle("slow");
+      setTimeout(function(){
+      $("#mainGame").slideToggle("slow");
+      }, 1000);
+      helper = 'first';
+    }
+
+
+
+    else{
+
+
+    	$.ajax({url: url, success: function(result){
+        $("#mainProfile").html(result);
+    	}});
+
+
+
+
+      $("#mainGame").slideToggle("slow");
+      setTimeout(function(){
+      $("#mainProfile").slideToggle("slow");
+      }, 1000);
+      helper = 'second';
+    }
+    
+};
+
+
+
 
 //fill necesarry fields in the app::
 function fillInfo(){
