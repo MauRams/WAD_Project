@@ -19,3 +19,21 @@ nav{
 .right{
 	float:right;
 }
+.small_chat_input{
+	margin:13px;
+}
+.chatMessage1{
+background-color:gray;
+}
+.chatMessage2{
+background-color:#cc8400;
+}
+.userName{
+	margin:0px;
+	color:black;
+}
+.chatMessage{
+	color:red;
+	margin:0px;
+	font-size:20px;
+}

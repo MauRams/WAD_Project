@@ -36,18 +36,68 @@ app.configure(function() {
 });
 
 
+//array for users
+var clients = {};
 function handleIO(socket){
+	
+	//adding user to list
+	socket.on('add-user', function(data){
+		//writing to the object
+    clients[data] = {
+      "socket": socket.id,
+      'name': data
+    };
+                     //if user connects, provide him with userlist and others as well
+    socket.broadcast.emit('update-list',clients);
+    socket.emit('update-list',clients);
+
+  });
+					//handling Small Chat window::
+
+
+
+					socket.on('messageToAll',function(msg){
+						    socket.broadcast.emit('chatIncomingMessage',msg);
+    						socket.emit('chatIncomingMessage',msg);
+    					
+					})
+
+
+	                 
+
+
+	                 //when requireing userlist presenting it
+
+
+
+
+	socket.on('user-list',function(){
+		                   //if new user connects, emmit userlist
+		socket.emit('update-list',clients);
+		console.log('working');
+	});
+
+					//Handling Disconnection::
+	
 	function disconnect(){
-		console.log("Disconnected");
-		socket.broadcast.emit('disconn',socket.id);
+		//finding which user disconnected
+		for (var key in clients) {
+	if(clients[key].socket === socket.id){
+		console.log(key);
+		//deleting that entry
+		delete clients[key];
 	}
+ 
+	}
+		socket.broadcast.emit('update-list',clients);
+	};
+
+
+
+
+
 
 	console.log("connected");
-	socket.broadcast.emit('conn',socket.id);
-	
-	var intv = setInterval(function(){
-		socket.emit("message",Math.random());
-	},1000);
 	//whenever client disconnected
 	socket.on("disconnect",disconnect);
 }

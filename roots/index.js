@@ -3,13 +3,14 @@ module.exports = function(app, passport) {
 
 	
 		app.get('/', isLoggedIn, function(req, res) {
+
 		res.render('shell.ejs', {
 			user : req.user // get the user out of session and pass to template
 		});
 	});
 
 
-			//returns on profile page
+			//returns parts of the page
 		app.get('/profile', isLoggedIn, function(req, res) {
 		res.render('prof.ejs');
 	});
@@ -19,6 +20,18 @@ module.exports = function(app, passport) {
 
 		app.get('/messages', isLoggedIn, function(req, res) {
 		res.render('messages.ejs');
+	});
+
+
+		//socket io test
+				app.get('/socket', isLoggedIn, function(req, res) {
+
+				//var nickName = req.user;
+				//nickName = nickName.local.email
+				
+		res.render('socket.ejs',{
+			user : req.user // get the user out of session and pass to template
+		});
 	});
 
 

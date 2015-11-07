@@ -1,0 +1,76 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+	<title>Table-Game-Portal</title>
+	<script src="socket.io.js"></script>
+	<script src='jquery-1.11.3.js'></script>
+	
+	<link rel="stylesheet" href="bootstrap.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+
+<script>
+
+var socket = io.connect('/');
+
+//converting value to string
+var user = <%- JSON.stringify(user.local.email) %>;
+console.log(user);
+
+//on connect informs
+socket.on("connect",function(){
+	console.log('connected');
+	socket.emit('add-user', user);
+});
+
+//listens for disconnection
+socket.on("disconnect",function(){
+	console.log('disconnected');
+});
+
+socket.on('clientList',function(userList){
+	console.log(userList);
+var keys = Object.keys(userList);
+	console.log(keys);
+})
+
+var checkConnections = function(){
+	socket.emit('user-list');
+}
+
+</script>
+	
+</head>
+<body>
+
+
+
+<div class="container">
+	<div class="page-header text-center">
+		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+	</div>
+	<div class="row">
+		<!-- LOCAL INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Local</h3>
+				<a href="javascript:checkConnections()" class="btn btn-default btn-sm">UsersConnected</a>
+					
+
+					
+
+			</div>
+		</div>
+		<div class="col-sm-6" id='connected'>
+
+
+		</div>
+
+	</div>
+
+</div>
+</body>
+</html>

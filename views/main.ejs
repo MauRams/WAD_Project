@@ -12,12 +12,142 @@
 <link href="style.css" rel="stylesheet" type="text/css" />
 <link href="style_mod.css" rel="stylesheet" type="text/css" />
 <!--Scripts-->
+ 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
  	<script src="files/jquery-1.11.3.js" type="text/javascript"></script>
  	<script src="files/bootstrap.js" type="text/javascript"></script>
+
+ 	
 <!--My own Scripts-->
  	<script src="js/script.js" type="text/javascript"></script>
+
+
+<script>
+var socket = io.connect('/');
+
+//converting value to string
+var user = <%- JSON.stringify(user.local.email) %>;
+console.log(user);
+
+//on connect informs
+socket.on("connect",function(){
+	console.log('connected');
+	socket.emit('add-user', user);
+	checkConnections();
+});
+
+//listens for disconnection
+socket.on("disconnect",function(){
+	console.log('disconnected');
+});
+
+socket.on('clientList',function(userList){
+	console.log(userList);
+var keys = Object.keys(userList);
+	console.log(keys);
+})
+
+var checkConnections = function(){
+	socket.emit('user-list');
+}
+
+socket.on('update-list',function(list){
+	//transfering object into list of users
+
+
+console.log('working');
+var keys = Object.keys(list);
+    	var div = document.createElement("div");
+    	var element = document.getElementById("user_list_small");
+    	element.innerHTML = '';
+    	for(var i = 0; i <keys.length;i++){
+    		
+var para = document.createElement("h4");
+var node = document.createTextNode(keys[i]);
+para.appendChild(node);
+div.appendChild(para);
+
+
+
+    	}
+element.appendChild(div);
+
+});
+//~~~~~~~~~~~~~~~~~~~For Chat~~~~~~~~~~~~~#
+
+var sendMessage = function(){
+//assemble JSON to send
+var chatmsg = {};
+chatmsg.user = user;
+
+chatmsg.message = document.getElementById('chatMessage').value;
+
+socket.emit('messageToAll', chatmsg);
+document.getElementById('chatMessage').value = '';
+};
+
+socket.on('chatIncomingMessage',function(msg){
+	addMessage(msg);
+});
+
+//variable for different color messages
+var state;
+				
+
+
+				//if we would get the message, fire this one
+
+				
+var addMessage = function(messageObject){
+
+	//var elementt = document.getElementById("chat_small");
+
+	var div = document.createElement("div");
+
+	var user = document.createElement("h6");
+	var message = document.createElement("h6");
+
+	var userText = document.createTextNode(messageObject.user + ':');
+	var messageText = document.createTextNode(messageObject.message);
+
+
+	user.appendChild(userText);
+	message.appendChild(messageText);
+
+	user.className = 'userName';
+	message.className = 'chatMessage';
+
+	div.appendChild(user);
+	div.appendChild(message);
+
+	if(state){
+	div.className = 'chatMessage1';
+	state = false;
+	}
+	else{
+	div.className = 'chatMessage2';
+	state = true;
+	}
+
+
+	$("#chat_small").prepend(div);
+	//elementt.prependChild(div);
+};
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
 </head>
-<body>
+<body onload="checkConnections()">
+	
 <div class="container color_background nopad">
 
 		<!-- NavBar Starting -->
@@ -103,7 +233,7 @@
 					<!-- main info -->
 
 
-	<div id='mainGame'class="col-md-8">
+	<div id='mainGame'class="col-md-7">
 		<div class="custom_block center-block color_box"><h3 class="text-center">MainGameWindow</h3>
 			<div id='gameWindow' class="centerp center-block">
 			<p>There is plenty of tutorial pages around there in the web. This page is more about
@@ -124,7 +254,7 @@
 				<!-- otherWindow -->
 
 
-		<div id='mainProfile' class="col-md-8">
+		<div id='mainProfile' class="col-md-7">
 		<div class="custom_block center-block color_box"><h3 class="text-center">MainGameWindow</h3>
 			<div id='gameWindow' class="centerp center-block">
 			<p>There is plenty of tutorial pages around there in the web. This page is more about
@@ -144,41 +274,39 @@
 
 
 
-				<div class="col-md-2 clear right">
+				<div class="col-md-3 clear right">
 		<div class="custom_block center-block color_box"><h4 class="text-center">UserList</h4>
 			<div class="centerp center-block">
 		<div id="user_list_small" style="height: 120px; overflow-y: scroll;">
-			<div class="user_entity"><h5>UserName</h5></div>
-			<div class="user_entity"><h5>UserName1</h5></div>
-			<div class="user_entity"><h5>UserName2</h5></div>
-			<div class="user_entity"><h5>UserName3</h5></div>
-			<div class="user_entity"><h5>UserName4</h5></div>
-			<div class="user_entity"><h5>UserName5</h5></div>
+
 		</div>
 			</div>		
 	</div></div>
 
 
 
-	<div class="col-md-2 clear right">
+	<div class="col-md-3 clear right">
 		<div class="custom_block center-block color_box"><h4 class="text-center">Chat</h4>
 			<div class="centerp center-block">
-				<div id="chat_small color" style="height: 120px; overflow-y: scroll;">
-					<div class="user_entity"><h5>UserName</h5></div>
-					<div class="user_entity"><h5>UserName1</h5></div>
-					<div class="user_entity"><h5>UserName2</h5></div>
-					<div class="user_entity"><h5>UserName3</h5></div>
-					<div class="user_entity"><h5>UserName4</h5></div>
-					<div class="user_entity"><h5>UserName5</h5></div>
+				<div id="chat_small" style="height: 120px; overflow-y: scroll;">
 				</div>
-			</div>	
+			</div>
+
+
+	<div class="input-group small_chat_input">
+      <input id='chatMessage' type="text" class="form-control" placeholder="Your Message Here">
+      <span class="input-group-btn">
+
+        <button onclick='sendMessage()' class="btn btn-default" type="button">Send</button>
+      </span>
+    </div>
+
 		</div>
 	</div>
 
 	</div>
 <footer class="text-center">
 	NCI Team 2015 C.
-
 <br/>
 </footer>
 </div>
